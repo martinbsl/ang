@@ -1,0 +1,10 @@
+A developer can mark a testng-test as "acceptance-test"
+so that it will always run successfully even if the test fails.
+
+ Test marked          |              |
+ as "acceptance-test" | Test fails ? | Test result
+======================+==============+==============
+        YES           |     YES      |   SUCCESS
+        YES           |      NO      |   SUCCESS
+         NO           |     YES      |   FAILURE
+         NO           |      NO      |   SUCCESS
