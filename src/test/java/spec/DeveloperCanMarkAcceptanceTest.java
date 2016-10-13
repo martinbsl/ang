@@ -1,42 +1,44 @@
 package spec;
 
+import de.busley.ang.testng.TestNGBuilder;
 import org.testng.TestNG;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import test.developerCanMarkAcceptanceTest.AnAcceptanceTest;
 import test.developerCanMarkAcceptanceTest.NotAnAcceptanceTest;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static de.busley.ang.testng.TestNGAssert.assertThat;
+import static de.busley.ang.testng.TestNGBuilder.testNG;
 
 /**
  * @author Martin Busley
  */
 public class DeveloperCanMarkAcceptanceTest {
 
-    private TestNG testNG;
+    private TestNGBuilder testNGBuilder;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        testNG = new TestNG();
-        testNG.setDefaultSuiteName("DeveloperCanMarkAcceptanceTest");
-        testNG.setVerbose(0);
+        testNGBuilder = testNG("DeveloperCanMarkAcceptanceTest");
     }
 
     @Test
     public void failingTestIsSuccess_WhenMarkedAsAcceptanceTest() throws Exception {
-        testNG.setTestClasses(new Class[]{AnAcceptanceTest.class});
+        TestNG testNG = testNGBuilder
+                .testClasses(AnAcceptanceTest.class).build();
 
         testNG.run();
 
-        assertThat(testNG.hasFailure()).describedAs("testNG has failure").isFalse();
+        assertThat(testNG).isSuccess();
     }
 
     @Test
     public void failingTestIsFailure_WhenNotMarkedAsAcceptanceTest() throws Exception {
-        testNG.setTestClasses(new Class[]{NotAnAcceptanceTest.class});
+        TestNG testNG = testNGBuilder
+                .testClasses(NotAnAcceptanceTest.class).build();
 
         testNG.run();
 
-        assertThat(testNG.hasFailure()).describedAs("testNG has failure").isTrue();
+        assertThat(testNG).hasFailure();
     }
 }
