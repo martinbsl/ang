@@ -14,6 +14,8 @@ public final class AcceptanceTestListener extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult testResult) {
-        testResult.setStatus(SUCCESS);
+        if (testResult.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Done.class) == null) {
+            testResult.setStatus(SUCCESS);
+        }
     }
 }

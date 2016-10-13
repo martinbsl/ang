@@ -1,0 +1,10 @@
+A developer can define an acceptance-test as "done"
+so that it must not fail any longer.
+
+ Test-Method    |              |
+ marked "@Done" | Test fails ? | Test result
+================+==============+==============
+        YES     |     YES      |   FAILURE
+        YES     |      NO      |   SUCCESS
+         NO     |     YES      |   FAILURE
+         NO     |      NO      |   SUCCESS
