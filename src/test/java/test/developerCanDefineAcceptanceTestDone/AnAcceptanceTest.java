@@ -1,8 +1,7 @@
 package test.developerCanDefineAcceptanceTestDone;
 
-import de.busley.ang.testng.AcceptanceTestListener;
+import de.busley.ang.testng.AcceptanceTest;
 import de.busley.ang.testng.Done;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -10,9 +9,10 @@ import static org.fest.assertions.api.Assertions.assertThat;
 /**
  * @author Martin Busley
  */
+@SuppressWarnings("groupsTestNG")
 @Test
-@Listeners(AcceptanceTestListener.class)
-public class AcceptanceTest {
+@AcceptanceTest
+public class AnAcceptanceTest {
 
     @Test(groups = "failingTest_Done")
     @Done

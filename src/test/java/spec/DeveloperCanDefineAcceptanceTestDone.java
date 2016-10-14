@@ -6,7 +6,7 @@ import org.testng.TestNG;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import test.developerCanDefineAcceptanceTestDone.AcceptanceTest;
+import test.developerCanDefineAcceptanceTestDone.AnAcceptanceTest;
 
 import static de.busley.ang.testng.TestNGAssert.assertThat;
 import static de.busley.ang.testng.TestNGBuilder.testNG;
@@ -28,7 +28,7 @@ public class DeveloperCanDefineAcceptanceTestDone {
     @Test(dataProvider = "testMethod_expectedOutcome")
     public void failingAcceptanceTestIsFAILURE_WhenMarkedAsDone(String testMethod, Condition<TestNG> expectedOutcome) {
         TestNG testNG = testNGBuilder
-                .testClasses(AcceptanceTest.class)
+                .testClasses(AnAcceptanceTest.class)
                 .groups(testMethod)
                 .build();
 
