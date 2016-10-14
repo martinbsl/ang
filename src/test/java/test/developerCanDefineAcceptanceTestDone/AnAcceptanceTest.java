@@ -1,7 +1,7 @@
 package test.developerCanDefineAcceptanceTestDone;
 
-import de.busley.ang.testng.AcceptanceTest;
-import de.busley.ang.testng.Done;
+import de.busley.ang.AcceptanceTest;
+import de.busley.ang.Done;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;

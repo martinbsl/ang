@@ -1,4 +1,4 @@
-package de.busley.ang.testng;
+package de.busley.ang;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

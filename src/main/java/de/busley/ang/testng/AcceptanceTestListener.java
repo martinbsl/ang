@@ -1,5 +1,7 @@
 package de.busley.ang.testng;
 
+import de.busley.ang.AcceptanceTest;
+import de.busley.ang.Done;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 

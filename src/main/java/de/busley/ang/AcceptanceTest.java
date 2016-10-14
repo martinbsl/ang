@@ -1,4 +1,4 @@
-package de.busley.ang.testng;
+package de.busley.ang;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -13,7 +13,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * This annotation signals, that a failure of a test-method should not break the current build unless it is marked as "done".
  *
  * @author Martin Busley
- * @see de.busley.ang.testng.Done
+ * @see Done
  */
 @Retention(RUNTIME)
 @Target(TYPE)

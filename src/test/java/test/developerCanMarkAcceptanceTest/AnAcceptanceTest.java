@@ -1,6 +1,6 @@
 package test.developerCanMarkAcceptanceTest;
 
-import de.busley.ang.testng.AcceptanceTest;
+import de.busley.ang.AcceptanceTest;
 import org.testng.annotations.Test;
 
 import static de.busley.ang.fest.Conditions.foul;
