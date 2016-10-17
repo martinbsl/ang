@@ -1,0 +1,2 @@
+A product owner can view the test result as an HTML report,
+so that she can use the information on finished requirements for release-/sprint-planning.

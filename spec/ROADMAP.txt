@@ -1,0 +1,15 @@
+version 1
+=========
+Basic functionality to run acceptance tests created by the developer. These tests must not break
+the build but report the current status of fulfilment.
+
+o developer can mark acceptance test
+o developer can define acceptance test done
+o developer can run acceptance tests using junit
+o po can view test results
+
+and then
+========
+Let the business analyst define acceptance criteria through a web interface. She can also "run"
+the tests that have been implemented by a developer.
+The tester can compare execution results of different revisions so she know what features to verify.
