@@ -13,6 +13,7 @@ import static de.busley.ang.testng.TestNGBuilder.testNG;
 /**
  * @author Martin Busley
  */
+@Test
 public class DeveloperCanMarkAcceptanceTest {
 
     private TestNGBuilder testNGBuilder;
@@ -22,7 +23,6 @@ public class DeveloperCanMarkAcceptanceTest {
         testNGBuilder = testNG("DeveloperCanMarkAcceptanceTest");
     }
 
-    @Test
     public void failingTestIsSuccess_WhenMarkedAsAcceptanceTest() throws Exception {
         TestNG testNG = testNGBuilder
                 .testClasses(AnAcceptanceTest.class).build();
@@ -32,7 +32,6 @@ public class DeveloperCanMarkAcceptanceTest {
         assertThat(testNG).isSuccess();
     }
 
-    @Test
     public void failingTestIsFailure_WhenNotMarkedAsAcceptanceTest() throws Exception {
         TestNG testNG = testNGBuilder
                 .testClasses(NotAnAcceptanceTest.class).build();

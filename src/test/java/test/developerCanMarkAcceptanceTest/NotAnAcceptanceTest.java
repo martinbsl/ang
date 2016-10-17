@@ -11,12 +11,10 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Test
 public class NotAnAcceptanceTest {
 
-    @Test
     public void aFailingTest() throws Exception {
         assertThat("fair").is(foul());
     }
 
-    @Test
     public void aSuccessFulTest() throws Exception {
         assertThat(true).isTrue();
     }
