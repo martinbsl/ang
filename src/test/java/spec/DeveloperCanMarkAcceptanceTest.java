@@ -1,5 +1,6 @@
 package spec;
 
+import de.busley.ang.testng.AcceptanceTestListener;
 import de.busley.ang.testng.TestNGBuilder;
 import org.testng.TestNG;
 import org.testng.annotations.BeforeMethod;
@@ -20,7 +21,8 @@ public class DeveloperCanMarkAcceptanceTest {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        testNGBuilder = testNG("DeveloperCanMarkAcceptanceTest");
+        testNGBuilder = testNG("DeveloperCanMarkAcceptanceTest")
+                .listeners(AcceptanceTestListener.class);
     }
 
     public void failingTestIsSuccess_WhenMarkedAsAcceptanceTest() throws Exception {

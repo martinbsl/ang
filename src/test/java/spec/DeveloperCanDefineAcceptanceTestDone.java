@@ -1,5 +1,6 @@
 package spec;
 
+import de.busley.ang.testng.AcceptanceTestListener;
 import de.busley.ang.testng.TestNGBuilder;
 import org.fest.assertions.core.Condition;
 import org.testng.TestNG;
@@ -22,11 +23,12 @@ public class DeveloperCanDefineAcceptanceTestDone {
 
     @BeforeMethod
     public void setUp() throws Exception {
-        testNGBuilder = testNG("DeveloperCanDefineAcceptanceTestDone");
+        testNGBuilder = testNG("DeveloperCanDefineAcceptanceTestDone")
+                .listeners(AcceptanceTestListener.class);
     }
 
     @Test(dataProvider = "testMethod_expectedOutcome")
-    public void failingAcceptanceTestIsFAILURE_WhenMarkedAsDone(String testMethod, Condition<TestNG> expectedOutcome) {
+    public void failingAcceptanceTestIsFAILURE_WhenMarkedAsDone(String testMethod, Condition<TestNG> expectedOutcome) throws Exception {
         TestNG testNG = testNGBuilder
                 .testClasses(AnAcceptanceTest.class)
                 .groups(testMethod)

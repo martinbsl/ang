@@ -11,6 +11,7 @@ public class TestNGBuilder {
     private int verbose = 0;
     private Class[] testClasses;
     private String groups;
+    private Class<?>[] listenerClasses;
 
     private TestNGBuilder(String suiteName) {
         this.suiteName = suiteName;
@@ -35,7 +36,12 @@ public class TestNGBuilder {
         return this;
     }
 
-    public TestNG build() {
+    public TestNGBuilder listeners(Class<?>... listenerClasses) {
+        this.listenerClasses = listenerClasses;
+        return this;
+    }
+
+    public TestNG build() throws Exception {
         TestNG testNG = new TestNG();
         testNG.setDefaultSuiteName(suiteName);
         testNG.setVerbose(verbose);
@@ -43,6 +49,11 @@ public class TestNGBuilder {
             testNG.setTestClasses(testClasses);
         }
         testNG.setGroups(groups);
+        if (listenerClasses != null) {
+            for (Class<?> listenerClass : listenerClasses) {
+                testNG.addListener(listenerClass.newInstance());
+            }
+        }
 
         return testNG;
     }
