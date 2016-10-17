@@ -1,21 +1,25 @@
 package de.busley.ang;
 
+import org.mockito.Mock;
+import org.mockito.testng.MockitoTestNGListener;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static de.busley.ang.TestStatus.SUCCESS;
 import static org.mockito.Mockito.*;
 
 @Test
+@Listeners(MockitoTestNGListener.class)
 public class AcceptanceTestMarkerTest {
 
     private AcceptanceTestMarker testMarker;
+    @Mock
     private TestExecutionResult testExecutionResult;
 
     @BeforeMethod
     public void setUp() throws Exception {
         testMarker = new AcceptanceTestMarker();
-        testExecutionResult = mock(TestExecutionResult.class);
     }
 
     public void setsTestResultToSUCCESS_WhenTestFailedAndAcceptanceTestNotDone() throws Exception {
