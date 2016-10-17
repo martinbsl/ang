@@ -5,10 +5,11 @@ repositories {
 }
 
 dependencies {
-    compile 'org.testng:testng:6.8+'
+    compile 'org.testng:testng:6+'
     compile 'org.easytesting:fest-assert-core:2.0+'
+    compile 'junit:junit:4+'
 
-    testCompile 'org.mockito:mockito-all:1.10+'
+    testCompile 'org.mockito:mockito-all:1+'
 }
 
 test {
