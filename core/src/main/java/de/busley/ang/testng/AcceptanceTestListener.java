@@ -16,6 +16,6 @@ public final class AcceptanceTestListener extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult testResult) {
-        acceptanceTestMarker.testFailed(new TestNGTestExecutionResult(testResult));
+//        acceptanceTestMarker.testFailed(new TestNGTestExecutionResult(testResult));
     }
 }

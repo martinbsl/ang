@@ -1,0 +1,22 @@
+dependencies {
+    compile 'org.testng:testng:6.8+'
+    compile 'org.easytesting:fest-assert-core:2.0+'
+    compile 'junit:junit:4+'
+
+    testCompile 'org.mockito:mockito-all:1+'
+    testCompile name: 'mockito-testng-1.0'
+}
+
+test {
+
+/*
+    useTestNG {
+        listeners << 'de.busley.ang.testng.AcceptanceTestListener'
+    }
+*/
+    jvmArgs << "-javaagent:${rootProject.projectDir}/lib/test/ang-agent-1.0-A.jar"
+
+    // contains acceptance-tests executed by the actual tests
+    exclude 'test/**'
+}
+

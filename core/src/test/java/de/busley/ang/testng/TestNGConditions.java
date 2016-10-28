@@ -1,9 +1,6 @@
 package de.busley.ang.testng;
 
-import org.fest.assertions.api.Assertions;
 import org.fest.assertions.core.Condition;
-import org.fest.assertions.description.Description;
-import org.fest.assertions.description.TextDescription;
 import org.testng.TestNG;
 
 import static org.fest.assertions.api.Assertions.not;
