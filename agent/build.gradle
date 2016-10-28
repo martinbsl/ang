@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+version = '1.0-A'
+
+jar {
+    manifest {
+        attributes 'Premain-Class': 'de.busley.ang.agent.Agent',
+                'Agent-Class': 'de.busley.ang.agent.Agent',
+                'Can-Redefine-Classes': 'true',
+                'Can-Retransform-Classes': 'true'
+    }
+}

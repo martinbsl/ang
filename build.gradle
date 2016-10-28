@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+version '1.0-A'
+
 repositories {
     mavenCentral()
     flatDir dirs: 'lib/test'
@@ -16,9 +18,15 @@ dependencies {
 
 test {
     useTestNG {
-        listeners['de.busley.ang.testng.AcceptanceTestListener']
+        listeners << 'de.busley.ang.testng.AcceptanceTestListener'
     }
 
-    // contains acceptance-tests executing by the actual tests
+    // contains acceptance-tests executed by the actual tests
     exclude 'test/**'
+}
+
+subprojects {
+    tasks.withType(Jar) {
+        baseName = "$rootProject.name-$project.name"
+    }
 }
