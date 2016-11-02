@@ -10,11 +10,11 @@ import java.lang.instrument.Instrumentation;
 @SuppressWarnings("UnusedParameters")
 public final class Agent {
 
-    public static void preMain(String agentArgs, Instrumentation instrumentation) {
-        agentMain(agentArgs, instrumentation);
+    public static void premain(String agentArgs, Instrumentation instrumentation) {
+        agentmain(agentArgs, instrumentation);
     }
 
-    public static void agentMain(String agentArgs, Instrumentation instrumentation) {
+    public static void agentmain(String agentArgs, Instrumentation instrumentation) {
         instrumentation.addTransformer(new AcceptanceTestTransformer());
     }
 }

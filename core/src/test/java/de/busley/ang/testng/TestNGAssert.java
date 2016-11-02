@@ -15,7 +15,7 @@ public class TestNGAssert extends AbstractAssert<TestNGAssert, TestNG> {
 
     public static TestNGAssert assertThat(TestNG actual) {
         Assertions.assertThat(actual).isNotNull();
-        return new TestNGAssert(actual);
+        return new TestNGAssert(actual).describedAs(actual.getDefaultSuiteName());
     }
 
     public TestNGAssert hasFailure() {

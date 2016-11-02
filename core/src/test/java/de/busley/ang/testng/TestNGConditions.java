@@ -22,6 +22,6 @@ public class TestNGConditions {
             public boolean matches(TestNG testNG) {
                 return testNG.hasFailure();
             }
-        };
+        }.describedAs("failure");
     }
 }

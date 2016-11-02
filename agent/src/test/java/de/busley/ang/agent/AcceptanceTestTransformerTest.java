@@ -2,8 +2,8 @@ package de.busley.ang.agent;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import test.AnAcceptanceTest;
 
-import java.lang.reflect.InvocationTargetException;
 import java.security.ProtectionDomain;
 
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -34,52 +34,25 @@ public class AcceptanceTestTransformerTest {
     }
 
     public void transformedMethodDoesNotThrowAssertionError_WhenClassIsAnAcceptanceTest() throws Exception {
-        byte[] transformedClass = acceptanceTestTransformer.transform(
-                USE_BOOTSTRAP_LOADER, "test.AnAcceptanceTest", NOT_BEING_REDEFINED, PROTECTION_DOMAIN, CLASSFILE_BUFFER
-        );
-        Class anAcceptanceTestClass = new ClassLoader() {
-            @Override
-            public Class<?> loadClass(String name) throws ClassNotFoundException {
-                if (name.equals("test.AnAcceptanceTest")) {
-                    return defineClass(name, transformedClass, 0, transformedClass.length);
-                } else {
-                    return super.loadClass(name);
-                }
-            }
-        }.loadClass("test.AnAcceptanceTest");
+        AssertionError assertionError = catchAssertionError(new AnAcceptanceTest()::throwsAssertionError);
 
-        Object anAcceptanceTest = anAcceptanceTestClass.newInstance();
-
-        anAcceptanceTestClass.getDeclaredMethod("throwsAssertionError").invoke(anAcceptanceTest);
+        assertThat(assertionError).isNull();
     }
 
     public void transformedMethodThrowsAssertionError_WhenMarkedAsDone() throws Throwable {
-        byte[] transformedClass = acceptanceTestTransformer.transform(
-                USE_BOOTSTRAP_LOADER, "test.AnAcceptanceTest", NOT_BEING_REDEFINED, PROTECTION_DOMAIN, CLASSFILE_BUFFER
-        );
-        Class anAcceptanceTestClass = new ClassLoader() {
-            @Override
-            public Class<?> loadClass(String name) throws ClassNotFoundException {
-                if (name.equals("test.AnAcceptanceTest")) {
-                    return defineClass(name, transformedClass, 0, transformedClass.length);
-                } else {
-                    return super.loadClass(name);
-                }
-            }
-        }.loadClass("test.AnAcceptanceTest");
+        AssertionError assertionError = catchAssertionError(new AnAcceptanceTest()::markedAsDone);
 
-        Object anAcceptanceTest = anAcceptanceTestClass.newInstance();
+        assertThat(assertionError).isNull();
+    }
 
-        AssertionError assertionError = null;
+    private static AssertionError catchAssertionError(Runnable runnable) throws Exception {
+        AssertionError assertionError;
         try {
-            anAcceptanceTestClass.getDeclaredMethod("markedAsDone").invoke(anAcceptanceTest);
-        } catch (InvocationTargetException e) {
-            if (e.getTargetException() instanceof AssertionError) {
-                assertionError = (AssertionError) e.getTargetException();
-            } else {
-                throw e.getTargetException();
-            }
+            runnable.run();
+            assertionError = null;
+        } catch (AssertionError e) {
+            assertionError = e;
         }
-        assertThat(assertionError).isNotNull();
+        return assertionError;
     }
 }

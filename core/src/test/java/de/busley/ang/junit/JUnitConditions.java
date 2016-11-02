@@ -23,6 +23,6 @@ public class JUnitConditions {
             public boolean matches(Result result) {
                 return result.getFailureCount() > 0;
             }
-        };
+        }.describedAs("failure");
     }
 }

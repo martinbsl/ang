@@ -17,17 +17,19 @@ import static org.mockito.Mockito.verify;
 @Listeners(MockitoTestNGListener.class)
 public class AgentTest {
 
+    private static final String EMPTY_ARGS = "";
+
     @Mock
     private Instrumentation instrumentation;
 
     public void agentMainAddsAcceptanceTestTransformer() throws Exception {
-        Agent.agentMain("", instrumentation);
+        Agent.agentmain(EMPTY_ARGS, instrumentation);
 
         verify(instrumentation).addTransformer(isA(AcceptanceTestTransformer.class));
     }
 
     public void preMainAddsAcceptanceTestTransformer() throws Exception {
-        Agent.preMain("", instrumentation);
+        Agent.premain(EMPTY_ARGS, instrumentation);
 
         verify(instrumentation).addTransformer(isA(AcceptanceTestTransformer.class));
     }

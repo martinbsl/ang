@@ -14,5 +14,21 @@ jar {
                 'Can-Redefine-Classes': 'true',
                 'Can-Retransform-Classes': 'true'
     }
+    from "$buildDir/agent-deps-classes"
 }
 
+
+task unpackAgentDeps() {
+    ant.mkdir(dir: '${buildDir}/agent-deps-classes')
+    ant.unjar(dest: '${buildDir}/agent-deps-classes') {
+        ant.patternset {
+            ant.exclude(name: 'META-INF')
+            ant.exclude(name: 'META-INF/**/*')
+        }
+        configurations.compile.filter {
+            it.name.startsWith("javassist")
+        }.addToAntBuilder(ant, 'fileset', FileCollection.AntType.FileSet)
+    }
+}
+
+build.dependsOn unpackAgentDeps

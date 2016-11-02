@@ -8,14 +8,6 @@ dependencies {
 }
 
 test {
-
-/*
-    useTestNG {
-        listeners << 'de.busley.ang.testng.AcceptanceTestListener'
-    }
-*/
-    jvmArgs << "-javaagent:${rootProject.projectDir}/lib/test/ang-agent-1.0-A.jar"
-
     // contains acceptance-tests executed by the actual tests
     exclude 'test/**'
 }

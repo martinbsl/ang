@@ -13,7 +13,6 @@ import static java.lang.reflect.Modifier.isPublic;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.stream;
 import static javassist.CtClass.voidType;
-import static javassist.Modifier.PRIVATE;
 
 /**
  * @author Martin Busley
@@ -39,7 +38,7 @@ public class AcceptanceTestTransformer implements ClassFileTransformer {
         stream(ctClass.getDeclaredMethods())
                 .filter(AcceptanceTestTransformer::isTestMethod)
                 .filter(AcceptanceTestTransformer::notDone)
-                .forEach((ctMethod) -> catchAssertionError(ctClass, ctMethod));
+                .forEach((ctMethod) -> catchAssertionError(classPool, ctMethod));
 
         try {
             return ctClass.toBytecode();
@@ -48,31 +47,12 @@ public class AcceptanceTestTransformer implements ClassFileTransformer {
         }
     }
 
-    private void catchAssertionError(CtClass ctClass, CtMethod ctMethod) {
-        CtMethod newMethod;
+    private void catchAssertionError(ClassPool classPool, CtMethod ctMethod) {
         try {
-            newMethod = getOrCreateNewMethod(ctClass, ctMethod);
-            newMethod.setBody(ctMethod, new ClassMap());
-            ctMethod.setBody("try {_" + ctMethod.getName() + "();} catch (AssertionError e) {}");
+            ctMethod.addCatch("{return;}", classPool.get("java.lang.AssertionError"));
         } catch (NotFoundException | CannotCompileException e) {
             throw new InternalError(e.getMessage(), e);
         }
-    }
-
-    private CtMethod getOrCreateNewMethod(CtClass ctClass, CtMethod ctMethod) throws NotFoundException, CannotCompileException {
-        String newMethodName = "_" + ctMethod.getName();
-        CtClass[] parameterTypes = ctMethod.getParameterTypes();
-
-        CtMethod newMethod;
-        try {
-            newMethod = ctClass.getDeclaredMethod(newMethodName, parameterTypes);
-        } catch (NotFoundException e) {
-            newMethod = new CtMethod(voidType, newMethodName, parameterTypes, ctClass);
-            newMethod.setModifiers(PRIVATE);
-            ctClass.addMethod(newMethod);
-        }
-
-        return newMethod;
     }
 
     private static boolean isTestMethod(CtMethod ctMethod) {

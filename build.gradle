@@ -12,7 +12,10 @@ allprojects {
 
     test {
         useTestNG()
+        jvmArgs "-javaagent:${rootProject.projectDir}/agent/build/libs/ang-agent-1.0-A.jar"
     }
+
+    ant.buildDir = buildDir
 }
 
 subprojects {
@@ -20,3 +23,5 @@ subprojects {
         baseName = "$rootProject.name-$project.name"
     }
 }
+
+test.dependsOn agent: jar
